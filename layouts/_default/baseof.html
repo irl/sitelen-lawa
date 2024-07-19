@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head profile="http://gmpg.org/xfn/11">
+  {{ partial "head.html" . }}
+</head>
+<body class="govuk-template__body">
+  <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+  <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+  <header class="govuk-header" data-module="govuk-header">
+    {{ partial "header.html" . }}
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="govuk-footer">
+    {{ partial "footer.html" . }}
+  </footer>
+  {{ partialCached "js.html" . }}
+</body>
+</html>

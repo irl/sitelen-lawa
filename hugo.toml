@@ -1,0 +1,71 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+
+[languages]
+  [languages.en]
+    contentDir = 'content/en'
+    disabled = false
+    languageCode = 'en-GB'
+    languageDirection = 'ltr'
+    languageName = 'English'
+    weight = 1
+    [languages.en.params]
+      changeText = "Change language to English"
+      [languages.en.params.author]
+        name = "Demo Author"
+  [languages.tok]
+    contentDir = 'content/tok'
+    disabled = false
+    languageCode = 'tok-001'
+    languageDirection = 'ltr'
+    languageName = 'toki pona'
+    weight = 2
+    [languages.tok.params]
+      changeText = "o ante e toki tawa toki pona"
+      [languages.tok.params.author]
+        name = "jan lukin"
+
+
+[[menus.main]]
+name = 'Home'
+pageRef = '/'
+weight = 10
+
+[[menus.main]]
+name = 'Posts'
+pageRef = '/posts'
+weight = 20
+
+[[menus.main]]
+name = 'Tags'
+pageRef = '/tags'
+weight = 30
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.116.0"
+
+[[module.mounts]]
+    source = "assets"
+    target = "assets"
+[[module.mounts]]
+    source = "node_modules/govuk-frontend/dist/govuk/govuk-frontend.min.js"
+    target = "assets/js/govuk-frontend.min.js"
+[[module.mounts]]
+    source = "node_modules/inter-ui/inter.css"
+    target = "assets/css/inter.css"
+[[module.mounts]]
+    source = "node_modules/fontawesome-free/css/all.min.css"
+    target = "assets/css/fontawesome.css"
+[[module.mounts]]
+    source = "static"
+    target = "static"
+[[module.mounts]]
+    source = "node_modules/inter-ui/web"
+    target = "static/css/web"
+[[module.mounts]]
+    source = "node_modules/fontawesome-free/webfonts"
+    target = "static/webfonts"
+

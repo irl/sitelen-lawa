@@ -1,0 +1,38 @@
+<div class="govuk-header__container govuk-width-container">
+  <div class="govuk-header__logo">
+    <a href="/" class="govuk-header__link govuk-header__link--homepage">
+      {{ site.Title }}
+    </a>
+  </div>
+  <div class="govuk-header__content">
+    <nav aria-label="{{ T "Menu" }}" class="govuk-header__navigation">
+      <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" hidden>
+        {{ T "Menu" }}
+      </button>
+      <ul id="navigation" class="govuk-header__navigation-list">
+  {{- $page := . }}
+  {{- range .Site.Menus.main }}
+    {{- $attrs :=  dict "class" "govuk-header__navigation-item" }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = dict "class" "govuk-header__navigation-item govuk-header__navigation-item--active" "aria-current" "page" }}
+    {{- end }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+    <li
+        {{- range $k, $v := $attrs }}
+          {{- with $v }}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}>
+      <a class="govuk-header__link" href="{{ .URL }}"
+      >{{ $name }}</a>
+    </li>
+  {{- end }}
+      </ul>
+    </nav>
+  </div>
+</div>

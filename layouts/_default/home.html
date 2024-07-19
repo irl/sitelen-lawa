@@ -1,0 +1,64 @@
+{{ define "main" }}
+
+<div class="govuk-width-container">
+  <div class="govuk-phase-banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        Alpha
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a website.
+      </span>
+    </p>
+  </div>
+
+<nav class="hmrc-language-select" aria-label="Language switcher">
+  <ul class="hmrc-language-select__list">
+    {{- $current_language := .Site.Language.LanguageCode }}
+    {{- range .Site.Languages }}
+      {{- if (eq .LanguageCode $current_language) }}
+        <li class="hmrc-language-select__list-item">
+          <span aria-current="true">{{ .LanguageName }}</span>
+        </li>
+      {{- else }}
+        <li class="hmrc-language-select__list-item">
+          <a href="/{{ .Lang }}" hreflang="{{ .LanguageCode }}" lang="{{ .LanguageCode }}" rel="alternate" class="govuk-link">
+            <span class="govuk-visually-hidden">{{ .Params.changeText }}</span>
+            <span aria-hidden="true">{{ .LanguageName }}</span></a>
+        </li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</nav>
+</div>
+
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content">
+    {{ .Content }}
+  </main>
+  <div class="app-home-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-3">{{ T "Latest Post" }}</h2>
+    {{- range first 1 site.RegularPages }}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <img src="/post.svg">
+         </div>
+        <div class="govuk-grid-column-two-thirds">
+          <p class="govuk-body-s govuk-!-margin-bottom-0 app-muted">
+            <time datetime="{{ .Date | time.Format "2006-01-02" }}" lang="{{ .Site.Language.LanguageCode }}">{{ .Date | time.Format ":date_medium" }}</time>
+          </p>
+          <h3 class="govuk-heading-s govuk-!-font-size-27 govuk-!-padding-top-0"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+          <p class="govuk-body">{{ .Summary }}</p>
+        </div>
+      </div>
+    {{- end }}
+  </div>
+  <div class="app-home-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-3">{{ T "Friends" }}</h2>
+  </div>
+  <div class="app-home-section">
+    <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-3">{{ T "Contact" }}</h2>
+  </div>
+
+</div>
+{{ end }}

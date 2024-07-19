@@ -1,0 +1,22 @@
+{{ define "main" }}
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper" id="main-content">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-xl">{{ .Title }}</h1>
+          <div class="govuk-body">
+            {{ .Content }}
+            {{ range .Pages }}
+              <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+              {{ .Summary }}
+            {{ end }}
+          </div>
+        </div>
+        <div class="govuk-grid-column-one-third">
+          <h2 class="govuk-heading-m">One-third column</h2>
+          <p class="govuk-body">This is a paragraph inside a one-third wide column</p>
+        </div>
+      </div>
+    </main>
+  </div>
+{{ end }}

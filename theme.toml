@@ -1,0 +1,24 @@
+name = 'sitelen lawa'
+license = 'MIT'
+licenselink = 'https://github.com/irl/sitelen-lawa/LICENSE'
+description = 'A multilingual Hugo theme based on the GOV.UK design system, geared towards personal websites.'
+
+# The home page of the theme, where the source can be found
+homepage = 'https://github.com/irl/sitelen-lawa'
+
+# If you have a running demo of the theme
+demosite = 'https://irl.github.io/sitelen-lawa'
+
+# Taxonomy terms
+tags = ['blog', 'personal']
+features = ['multilingual']
+
+authors = [
+  {name = 'irl', homepage = 'https://irl.xyz/'}
+]
+
+[original]
+  author = 'GOV.UK Design System team'
+  homepage = 'GOV.UK Frontend'
+  repo = 'https://frontend.design-system.service.gov.uk/'
+
