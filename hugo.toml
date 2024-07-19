@@ -1,6 +1,5 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://irl.github.io/sitelen-lawa/'
+title = 'sitelen lawa'
 
 [languages]
   [languages.en]
