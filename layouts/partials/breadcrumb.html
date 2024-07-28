@@ -1,0 +1,12 @@
+<nav class="govuk-breadcrumbs" aria-label="Breadcrumb">
+    <ol class="govuk-breadcrumbs__list">
+        {{- range .Ancestors.Reverse }}
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="{{ .RelPermalink }}">{{ if .IsHome }}{{ i18n "Home" }}{{ else }}{{ .Title }}{{ end }}</a>
+        </li>
+        {{- end }}
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link"  href="{{ .RelPermalink }}" aria-current="location">{{ .Title }}</a>
+        </li>
+    </ol>
+</nav>

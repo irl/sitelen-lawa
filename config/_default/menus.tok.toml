@@ -1,0 +1,14 @@
+[[main]]
+name = 'open'
+pageRef = '/'
+weight = 10
+
+[[main]]
+name = 'tenpo'
+pageRef = '/posts'
+weight = 20
+
+[[main]]
+name = 'nimi kulupu'
+pageRef = '/tags'
+weight = 30

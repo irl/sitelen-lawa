@@ -28,7 +28,7 @@
             {{- printf " %s=%q" $k $v | safeHTMLAttr }}
           {{- end }}
         {{- end -}}>
-      <a class="govuk-header__link" href="{{ .URL }}"
+      <a class="govuk-header__link" href="{{ relLangURL .URL }}"
       >{{ $name }}</a>
     </li>
   {{- end }}

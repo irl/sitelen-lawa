@@ -9,9 +9,35 @@
   <header class="govuk-header" data-module="govuk-header">
     {{ partial "header.html" . }}
   </header>
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
+  <div class="govuk-width-container">
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          Alpha
+        </strong>
+        <span class="govuk-phase-banner__text">
+        This is a website.
+      </span>
+      </p>
+    </div>
+    {{- if .Translations }}
+    <nav class="hmrc-language-select" aria-label="Language switcher">
+      <ul class="hmrc-language-select__list">
+        <li class="hmrc-language-select__list-item">
+          <span aria-current="true">{{ or .Language.LanguageName .Language.Lang }}</span>
+        </li>
+        {{- range .Translations }}
+        <li class="hmrc-language-select__list-item">
+          <a href="{{ .RelPermalink }}" hreflang="{{ .Language.LanguageCode }}" lang="{{ .Language.LanguageCode }}" rel="alternate" class="govuk-link">
+            <span class="govuk-visually-hidden">{{ .Language.Params.changeText }}</span>
+            <span aria-hidden="true">{{ or .Language.LanguageName .Language.Lang }}</span></a>
+        </li>
+        {{- end }}
+      </ul>
+    </nav>
+    {{- end }}
+  </div>
+  {{ block "main" . }}{{ end }}
   <footer class="govuk-footer">
     {{ partial "footer.html" . }}
   </footer>

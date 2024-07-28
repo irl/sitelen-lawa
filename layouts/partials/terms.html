@@ -11,13 +11,11 @@ For a given taxonomy, renders a list of terms assigned to the page.
 {{- $taxonomy := .taxonomy }}
 
 {{- with $page.GetTerms $taxonomy }}
-  {{- $label := (index . 0).Parent.LinkTitle }}
+  {{- $label := T ((index . 0).Parent.LinkTitle) }}
   <div>
-    <div>{{ $label }}:</div>
-    <ul>
+    <p class="govuk-visually-hidden">{{ $label }}:</p>
       {{- range . }}
-        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        <a href="{{ .RelPermalink }}"><strong class="govuk-tag">{{ .LinkTitle }}</strong></a>
       {{- end }}
-    </ul>
   </div>
 {{- end }}
