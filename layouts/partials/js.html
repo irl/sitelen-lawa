@@ -7,3 +7,8 @@
     </script>
   {{- end }}
 {{- end }}
+{{- with resources.Get "js/app.js" }}
+  {{- with . | fingerprint }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+  {{- end }}
+{{- end }}

@@ -1,7 +1,75 @@
-<nav aria-describedby="sidebar-friends-heading">
-<h1 id="sidebar-friends-heading" class="govuk-heading-m">{{ T "Friends" }}</h1>
+{{ if .IsPage }}
+<aside aria-describedby="app-sidebar-share-heading" class="app-sidebar-section">
+    <h1 class="govuk-heading-m" id="app-sidebar-share-heading">
+        {{ T "Share" }}
+    </h1>
+    <ul class="app-links-list" id="app-share-list">
+        <li class="app-links-list-item">
+            <a href="https://www.facebook.com/sharer.php?u={{ .Permalink }}">
+                <i aria-hidden="true" class="lab la-facebook"></i>
+                <span class="govuk-visually-hidden">Share with</span>
+                Facebook
+            </a>
+        </li>
+        <li class="app-links-list-item">
+            <a href="https://twitter.com/share?url={{ .Permalink }}&text={{ .Title }}">
+                <i aria-hidden="true" class="lab la-twitter"></i>
+                <span class="govuk-visually-hidden">Share with</span>
+                Twitter
+            </a>
+        </li>
+
+        <li class="app-links-list-item">
+            <a href="https://api.whatsapp.com/send?text={{ .Title }}%20{{ .Permalink }}">
+                <i aria-hidden="true" class="lab la-whatsapp"></i>
+                <span class="govuk-visually-hidden">Share with</span>
+                WhatsApp
+            </a>
+        </li>
+        <li class="app-links-list-item">
+            <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}&title={{ .Title }}">
+                <i aria-hidden="true" class="lab la-linkedin"></i>
+                <span class="govuk-visually-hidden">Share with</span>
+                LinkedIn
+            </a>
+        </li>
+        <li class="app-links-list-item">
+            <a href="https://www.tumblr.com/share/link?url={{ .Permalink }}&name={{ .Title }}&description={{ .Summary | strings.Truncate 50 }}">
+                <i aria-hidden="true" class="lab la-tumblr"></i>
+                <span class="govuk-visually-hidden">Share with</span>
+                Tumblr
+            </a>
+        </li>
+    </ul>
+</aside>
+{{ end }}
+
+<nav aria-describedby="app-sidebar-friends-heading" class="app-sidebar-section">
+    <h1 class="govuk-heading-m" id="app-sidebar-friends-heading">{{ T "Friends" }}</h1>
+    <ul class="app-links-list">
+        {{ range (sort .Site.Params.friends "weight") }}
+        <li class="app-links-list-item">
+            <a href="{{ .url }}" rel="{{ delimit .xfn ' ' }}">
+                <i aria-hidden="true" class="{{ if .icon }}{{ .icon }}{{ else }}las la-user{{ end }}"></i>
+                <span class="app-friends-name">{{ .name }}</span>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
 </nav>
 
-<nav aria-describedby="sidebar-contact-heading">
-    <h1 id="sidebar-contact-heading" class="govuk-heading-m">{{ T "Contact" }}</h1>
+
+<nav aria-describedby="app-sidebar-contact-heading" class="app-sidebar-section">
+    <h1 class="govuk-heading-m" id="sidebar-contact-heading">{{ T "Contact" }}</h1>
+    <ul class="app-links-list">
+        {{ range (sort .Site.Params.contact "weight") }}
+        <li class="app-links-list-item">
+            <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
+                <i aria-hidden="true" class="{{ .icon }}"></i>
+                <address class="govuk-!-display-inline">{{ .text }}</address>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+    </table>
 </nav>

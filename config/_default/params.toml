@@ -1,0 +1,27 @@
+
+
+[[contact]]
+weight = 10
+method = "Email"
+icon = "las la-envelope"
+text = "iain@learmonth.me"
+url = "mailto:iain@learmonth.me"
+
+[[contact]]
+weight = 20
+method = "Discord"
+icon = "lab la-discord"
+text = "irlxyz"
+url = "https://discord.com/users/716273985637318666"
+
+[[friends]]
+weight = 10
+name = "Google"
+url = "https://www.google.com/"
+xfn = ['met']
+
+[[friends]]
+weight = 20
+name = "Yahoo"
+url = "https://www.yahoo.com/"
+xfn = ['neighbor']

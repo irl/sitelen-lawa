@@ -42,8 +42,8 @@ relativeURLs = true
     source = "node_modules/inter-ui/inter.css"
     target = "assets/css/inter.css"
 [[module.mounts]]
-    source = "node_modules/fontawesome-free/css/all.min.css"
-    target = "assets/css/fontawesome.css"
+    source = "node_modules/line-awesome/dist/line-awesome/css"
+    target = "assets/css"
 [[module.mounts]]
     source = "static"
     target = "static"
@@ -51,6 +51,6 @@ relativeURLs = true
     source = "node_modules/inter-ui/web"
     target = "static/css/web"
 [[module.mounts]]
-    source = "node_modules/fontawesome-free/webfonts"
-    target = "static/webfonts"
+    source = "node_modules/line-awesome/dist/line-awesome/fonts"
+    target = "static/fonts"
 
