@@ -46,7 +46,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
-        run: "npm install govuk-frontend hmrc-frontend inter-ui fontawesome-free"
+        run: "npm install govuk-frontend hmrc-frontend inter-ui line-awesome"
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache

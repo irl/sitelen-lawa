@@ -11,7 +11,7 @@ Work in progress! Not ready for use yet, but happy to take feedback.
 ## Installation
 
 * Create a new Hugo site
-* Install the npm requirements: govuk-frontend, hmrc-frontend, fontawesome-free, inter-ui
+* Install the npm requirements: govuk-frontend, hmrc-frontend, line-awesome, inter-ui
 * Install the theme: cd $site/themes; git clone https://github.com/irl/sitelen-lawa.git
 
 ## Configuration
