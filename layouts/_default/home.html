@@ -27,7 +27,7 @@
                 {{ T "You can contact me with any of the following methods:" }}
             </p>
             <div class="govuk-grid-row">
-                <div class="govuk-grid-column-two-thirds">
+                <address class="govuk-grid-column-two-thirds">
                     <table class="govuk-table">
                         {{ range (sort .Site.Params.contact "weight") }}
                         <tr>
@@ -37,13 +37,13 @@
                             <td class="app-contact-list-item">
                                 <a href="{{ .url }}" rel="me">
                                     <i aria-hidden="true" class="{{ .icon }}"></i>
-                                    <address class="govuk-!-display-inline">{{ .text }}</address>
+                                    <span class="app-contact-list-item-text">{{ .text }}</span>
                                 </a>
                             </td>
                         </tr>
                         {{ end }}
                     </table>
-                </div>
+                </address>
             </div>
         </section>
         <section class="app-home-section">
@@ -58,7 +58,7 @@
                         <li class="app-links-list-item">
                             <a href="{{ .url }}" rel="{{ delimit .xfn " " }}">
                             <i class="{{ if .icon }}{{ .icon }}{{ else }}las la-user{{ end }}" aria-hidden="true"></i>
-                            <span class="app-friends-name">{{ .name }}</span>
+                            <span class="app-links-list-item-text">{{ .name }}</span>
                             <span class="govuk-visually-hidden">XFN tags:</span>
                             {{ range .xfn }}
                             <span class="govuk-tag">

@@ -1,0 +1,33 @@
+
+.govuk-gay.govuk-width-container::before {
+  background: linear-gradient(45deg,
+          #e50000 0% 9%,
+          #ff8d00 9% 18%,
+          #ffee00 18% 27%,
+          #028121 27% 36%,
+          #004cff 36% 45%,
+          #760088 45% 54%,
+          #ffffff 54% 63%,
+          #ffafc7 63% 72%,
+          #73d7ee 72% 81%,
+          #613915 81% 90%,
+          #000000 90% 100%);
+  pointer-events: none;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  display: block;
+  position: absolute;
+  margin-top: 0
+}
+
+.govuk-header__logotype {
+  margin: 0 0 0 0;
+  padding: 0;
+}
+
+.app-breadcrumbs-no-language-switcher {
+  padding-top: 52.25px;
+}

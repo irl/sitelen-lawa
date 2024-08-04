@@ -45,16 +45,19 @@ function addClipboardShareOption() {
         item.innerHTML = `
             <a href="#" role="button" id="app-share-clipboard-link">
                 <i class="las la-clipboard" aria-hidden="true"></i>
-                <span class="govuk-visually-hidden">Copy title and link to</span>
-                Clipboard
+                <span class="app-links-list-item-text">
+                    <span class="govuk-visually-hidden">Copy title and link to</span>
+                    Clipboard
+                </span>
             </a>`
         item.addEventListener('click', async function(event) {
             return await copyLinkAndTitleToClipboard();
         });
-        item.addEventListener('keypress', async function(event) {
+        item.addEventListener('keydown', async function(event) {
             if (event.key === " ") {
                 // To meet success criteria for WCAG 2.1.1 and 2.1.3
                 event.stopPropagation();
+                event.preventDefault();
                 return await copyLinkAndTitleToClipboard();
             }
             return true;

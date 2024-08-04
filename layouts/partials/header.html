@@ -1,9 +1,11 @@
-<div class="govuk-header__container govuk-width-container">
-  <h1 class="govuk-header__logo">
+<div class="govuk-header__container govuk-width-container{{ if .Site.Params.gay }} govuk-gay{{ end }}">
+ <div class="govuk-header__logo">
+  <h1 class="govuk-header__logotype">
     <a href="/" class="govuk-header__link govuk-header__link--homepage">
       {{ site.Title }}
     </a>
   </h1>
+ </div>
   <div class="govuk-header__content">
     <nav aria-label="{{ T "Menu" }}" class="govuk-header__navigation">
       <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" hidden>

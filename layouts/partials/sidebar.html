@@ -1,43 +1,53 @@
 {{ if .IsPage }}
 <aside aria-describedby="app-sidebar-share-heading" class="app-sidebar-section">
-    <h1 class="govuk-heading-m" id="app-sidebar-share-heading">
+    <h1 class="govuk-heading-s" id="app-sidebar-share-heading">
         {{ T "Share" }}
     </h1>
     <ul class="app-links-list" id="app-share-list">
         <li class="app-links-list-item">
             <a href="https://www.facebook.com/sharer.php?u={{ .Permalink }}">
                 <i aria-hidden="true" class="lab la-facebook"></i>
-                <span class="govuk-visually-hidden">Share with</span>
-                Facebook
+                <span class="app-links-list-item-text">
+                    <span class="govuk-visually-hidden">Share with</span>
+                    Facebook
+                </span>
             </a>
         </li>
         <li class="app-links-list-item">
             <a href="https://twitter.com/share?url={{ .Permalink }}&text={{ .Title }}">
                 <i aria-hidden="true" class="lab la-twitter"></i>
-                <span class="govuk-visually-hidden">Share with</span>
-                Twitter
+                <span class="app-links-list-item-text">
+                    <span class="govuk-visually-hidden">Share with</span>
+                    Twitter
+                </span>
             </a>
         </li>
 
         <li class="app-links-list-item">
             <a href="https://api.whatsapp.com/send?text={{ .Title }}%20{{ .Permalink }}">
                 <i aria-hidden="true" class="lab la-whatsapp"></i>
-                <span class="govuk-visually-hidden">Share with</span>
-                WhatsApp
+                <span class="app-links-list-item-text">
+                    <span class="govuk-visually-hidden">Share with</span>
+                    WhatsApp
+                </span>
             </a>
         </li>
         <li class="app-links-list-item">
             <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}&title={{ .Title }}">
                 <i aria-hidden="true" class="lab la-linkedin"></i>
-                <span class="govuk-visually-hidden">Share with</span>
-                LinkedIn
+                <span class="app-links-list-item-text">
+                    <span class="govuk-visually-hidden">Share with</span>
+                    LinkedIn
+                </span>
             </a>
         </li>
         <li class="app-links-list-item">
             <a href="https://www.tumblr.com/share/link?url={{ .Permalink }}&name={{ .Title }}&description={{ .Summary | strings.Truncate 50 }}">
                 <i aria-hidden="true" class="lab la-tumblr"></i>
-                <span class="govuk-visually-hidden">Share with</span>
-                Tumblr
+                <span class="app-links-list-item-text">
+                    <span class="govuk-visually-hidden">Share with</span>
+                    Tumblr
+                </span>
             </a>
         </li>
     </ul>
@@ -45,31 +55,31 @@
 {{ end }}
 
 <nav aria-describedby="app-sidebar-friends-heading" class="app-sidebar-section">
-    <h1 class="govuk-heading-m" id="app-sidebar-friends-heading">{{ T "Friends" }}</h1>
+    <h1 class="govuk-heading-s" id="app-sidebar-friends-heading">{{ T "Friends" }}</h1>
     <ul class="app-links-list">
         {{ range (sort .Site.Params.friends "weight") }}
         <li class="app-links-list-item">
             <a href="{{ .url }}" rel="{{ delimit .xfn ' ' }}">
                 <i aria-hidden="true" class="{{ if .icon }}{{ .icon }}{{ else }}las la-user{{ end }}"></i>
-                <span class="app-friends-name">{{ .name }}</span>
+                <span class="app-links-list-item-text">{{ .name }}</span>
             </a>
         </li>
         {{ end }}
     </ul>
 </nav>
 
-
-<nav aria-describedby="app-sidebar-contact-heading" class="app-sidebar-section">
-    <h1 class="govuk-heading-m" id="sidebar-contact-heading">{{ T "Contact" }}</h1>
+<address aria-describedby="app-sidebar-contact-heading" class="app-sidebar-section">
+    <h1 class="govuk-heading-s" id="sidebar-contact-heading">{{ T "Contact" }}</h1>
     <ul class="app-links-list">
         {{ range (sort .Site.Params.contact "weight") }}
         <li class="app-links-list-item">
             <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
                 <i aria-hidden="true" class="{{ .icon }}"></i>
-                <address class="govuk-!-display-inline">{{ .text }}</address>
+                <span class="app-links-list-item-text">
+                    {{ .text }}
+                </span>
             </a>
         </li>
         {{ end }}
     </ul>
-    </table>
-</nav>
+</address>

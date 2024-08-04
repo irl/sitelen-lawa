@@ -1,0 +1,23 @@
+.app-contact-list-item {
+  @extend .govuk-table__cell;
+  padding: 0;
+}
+
+.app-contact-list-item a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+.app-contact-list-item a:hover {
+  background-color: govuk-colour("light-grey");
+}
+
+.app-contact-list-item i {
+  color: $govuk-text-colour;
+}
+
+.app-contact-list-item-text {
+  text-decoration: underline;
+}

@@ -1,0 +1,34 @@
+
+.app-links-list {
+  @extend .govuk-list;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.app-links-list li {
+  margin: 0;
+}
+
+.app-links-list-item {
+  border-bottom: 1px solid $govuk-border-colour;
+}
+
+.app-links-list-item a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  padding: 10px 0 10px 0;
+}
+
+.app-links-list a:hover {
+  background-color: govuk-colour("light-grey");
+}
+
+.app-links-list-item i {
+  color: $govuk-text-colour;
+}
+
+.app-links-list-item-text {
+  text-decoration: underline;
+}
