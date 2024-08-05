@@ -7,11 +7,17 @@
           <h1 class="govuk-heading-xl">{{ .Title }}</h1>
           <div class="govuk-body">
             {{ .Content }}
-            {{ range .Pages }}
-              <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-              {{ .Summary }}
-            {{ end }}
           </div>
+            {{ $paginator := .Paginate .Pages 3 }}
+            {{ range $paginator.Pages }}
+            <article>
+              <h2 class="govuk-heading-l"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+              <p class="govuk-body">
+                {{ .Summary }}
+              </p>
+            </article>
+            {{ end }}
+            {{ partial "pagination.html" . }}
         </div>
         <div class="govuk-grid-column-one-third">
           {{ partial "sidebar.html" . }}

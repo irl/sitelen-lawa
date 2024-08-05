@@ -15,7 +15,8 @@
                     {{- .Content }}
                 </div>
                 <nav class="govuk-pagination govuk-pagination--block" aria-label="Pagination">
-                    {{- with .Prev }}
+                    {{- $pages := where .Site.RegularPages "Section" .Section }}
+                    {{- with $pages.Prev . }}
                     <div class="govuk-pagination__prev">
                         <a class="govuk-link govuk-pagination__link" href="{{ .RelPermalink }}" rel="prev">
                             <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
@@ -29,7 +30,7 @@
                         </a>
                     </div>
                     {{- end }}
-                    {{- with .Next }}
+                    {{- with $pages.Next . }}
                     <div class="govuk-pagination__next">
                         <a class="govuk-link govuk-pagination__link" href="{{ .RelPermalink }}" rel="next">
                             <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
