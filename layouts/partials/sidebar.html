@@ -3,13 +3,13 @@
     <h1 class="govuk-heading-s" id="app-sidebar-share-heading">
         {{ T "Share" }}
     </h1>
-    <ul class="app-links-list" id="app-share-list">
+    <ul class="app-links-list" id="app-share-list" data-copy-text="{{ T "Copy to clipboard" }}" data-more-text="{{ T "More" }}">
         <li class="app-links-list-item">
             <a href="https://www.facebook.com/sharer.php?u={{ .Permalink }}">
                 <i aria-hidden="true" class="lab la-facebook"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">Share with</span>
-                    Facebook
+                    {{ T "Facebook" }}
                 </span>
             </a>
         </li>
@@ -18,7 +18,7 @@
                 <i aria-hidden="true" class="lab la-twitter"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">Share with</span>
-                    Twitter
+                    {{ T "Twitter" }}
                 </span>
             </a>
         </li>
@@ -28,7 +28,7 @@
                 <i aria-hidden="true" class="lab la-whatsapp"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">Share with</span>
-                    WhatsApp
+                    {{ T "WhatsApp" }}
                 </span>
             </a>
         </li>
@@ -37,7 +37,7 @@
                 <i aria-hidden="true" class="lab la-linkedin"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">Share with</span>
-                    LinkedIn
+                    {{ T "LinkedIn" }}
                 </span>
             </a>
         </li>
@@ -46,7 +46,7 @@
                 <i aria-hidden="true" class="lab la-tumblr"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">Share with</span>
-                    Tumblr
+                    {{ T "Tumblr" }}
                 </span>
             </a>
         </li>

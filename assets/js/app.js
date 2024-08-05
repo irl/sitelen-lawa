@@ -74,14 +74,16 @@ function createShareOption(id, icon, text, handler) {
 }
 
 function addClipboardShareOption(shareList) {
-    const item = createShareOption("app-share-clipboard", "las la-clipboard", "Clipboard", shareWithClipboard);
+    const item = createShareOption("app-share-clipboard",
+        "las la-clipboard", shareList.dataset.copyText, shareWithClipboard);
     shareList.insertAdjacentElement('afterbegin', item);
 }
 
 function addNativeShareOption(shareList) {
     const shareData = getShareData();
     if (navigator.canShare && navigator.canShare(shareData)) {
-        const item = createShareOption("app-share-native", "las la-share", "More", shareWithApi);
+        const item = createShareOption("app-share-native",
+            "las la-share", shareList.dataset.moreText, shareWithApi);
         shareList.insertAdjacentElement('beforeend', item);
     }
 }
