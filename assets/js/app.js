@@ -22,48 +22,80 @@ async function copyToClipboard(text) {
         try {
             await navigator.clipboard.writeText(text);
             console.debug('Copied to clipboard');
-        } catch(err) {
+        } catch (err) {
             console.error('Error copying text: ', err);
             fallbackCopyTextToClipboard(text);
         }
     }
 }
 
-async function copyLinkAndTitleToClipboard() {
-    const title = document.querySelector("meta[property='og:title']").getAttribute('content');
-    const url = document.querySelector("meta[property='og:url']").getAttribute('content');
-    const text = title + " " + url;
+function getShareData() {
+    return {
+        title: document.querySelector("meta[property='og:title']").getAttribute('content'),
+        url: document.querySelector("meta[property='og:url']").getAttribute('content')
+    };
+}
+
+async function shareWithClipboard() {
+    const shareData = getShareData();
+    const text = shareData.title + " " + shareData.url;
     await copyToClipboard(text);
     return false;
 }
 
-function addClipboardShareOption() {
-    const shareList = document.querySelector("#app-share-list");
-    if (shareList) {
-        const item = document.createElement("li");
-        item.className = 'app-links-list-item';
-        item.innerHTML = `
-            <a href="#" role="button" id="app-share-clipboard-link">
-                <i class="las la-clipboard" aria-hidden="true"></i>
-                <span class="app-links-list-item-text">
-                    <span class="govuk-visually-hidden">Copy title and link to</span>
-                    Clipboard
-                </span>
-            </a>`
-        item.addEventListener('click', async function(event) {
-            return await copyLinkAndTitleToClipboard();
-        });
-        item.addEventListener('keydown', async function(event) {
-            if (event.key === " ") {
-                // To meet success criteria for WCAG 2.1.1 and 2.1.3
-                event.stopPropagation();
-                event.preventDefault();
-                return await copyLinkAndTitleToClipboard();
-            }
-            return true;
-        });
-        shareList.insertAdjacentElement('afterbegin', item);
+async function shareWithApi() {
+    const shareData = getShareData();
+    await navigator.share(shareData);
+    return false;
+}
+
+function createShareOption(id, icon, text, handler) {
+    const item = document.createElement("li");
+    item.className = 'app-links-list-item';
+    item.innerHTML = `
+    <a href="#" role="button" id="${id}">
+        <i class="${icon}" aria-hidden="true"></i>
+        <span class="app-links-list-item-text">${text}</span>
+    </a>
+    `;
+    item.addEventListener('click', async function (event) {
+        return await handler(event);
+    });
+    item.addEventListener('keypress', async function (event) {
+        if (event.key === " ") {
+            // To meet success criteria for WCAG 2.1.1 and 2.1.3
+            event.stopPropagation();
+            event.preventDefault();
+            return await handler(event);
+        }
+        return true;
+    });
+    return item;
+}
+
+function addClipboardShareOption(shareList) {
+    const item = createShareOption("app-share-clipboard", "las la-clipboard", "Clipboard", shareWithClipboard);
+    shareList.insertAdjacentElement('afterbegin', item);
+}
+
+function addNativeShareOption(shareList) {
+    const shareData = getShareData();
+    if (navigator.canShare && navigator.canShare(shareData)) {
+        const item = createShareOption("app-share-native", "las la-share", "More", shareWithApi);
+        shareList.insertAdjacentElement('beforeend', item);
     }
 }
 
-window.onload = addClipboardShareOption;
+function setupShareOptions() {
+    try {
+        const shareList = document.querySelector("#app-share-list");
+        addClipboardShareOption(shareList);
+        addNativeShareOption(shareList);
+    } catch (e) {
+        if (!(e instanceof DOMException)) {
+            console.error(e);
+        }
+    }
+}
+
+window.onload = setupShareOptions;
