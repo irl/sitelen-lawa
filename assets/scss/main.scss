@@ -1,5 +1,17 @@
+$govuk-include-default-font-face: false;
+$govuk-font-family: Inter, Arial, sans-serif;
+
 @import "overrides.scss";
 
 @import "node_modules/govuk-frontend/dist/govuk/all";
 @import "node_modules/hmrc-frontend/hmrc/components/language-select/_language-select.scss";
+
+@import "_base.scss";
+@import "_contact-list.scss";
+@import "_header.scss";
+@import "_home.scss";
+@import "_links-list.scss";
+@import "_sidebar.scss";
+@import "_text.scss";
+
 @import "styles.scss";
