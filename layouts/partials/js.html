@@ -7,7 +7,8 @@
     </script>
   {{- end }}
 {{- end }}
-{{- with resources.Get "js/app.js" }}
+{{- $opts := (dict "targetPath" "js/main.js") }}
+{{- with resources.Get "js/main.ts" | js.Build $opts }}
   {{- with . | fingerprint }}
     <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
   {{- end }}
