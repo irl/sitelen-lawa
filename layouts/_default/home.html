@@ -1,3 +1,25 @@
+{{ define "head" }}
+    <meta property="og:title" content="{{ .Site.Title }}">
+    {{- if .Site.Params.description }}
+        <meta name="description" property="og:description" content="{{ .Site.Params.description }}">
+    {{- end }}
+    <meta property="og:type" content="profile">
+    {{- with .Site.Params.first_name }}
+        <meta property="profile:first_name" content="{{ . }}">
+    {{- end }}
+    {{- with .Site.Params.last_name }}
+        <meta property="profile:last_name" content="{{ . }}">
+    {{- end }}
+    {{- with .Site.Params.username }}
+        <meta property="profile:username" content="{{ . }}">
+    {{- end }}
+    {{- if .Site.Params.og_image }}
+        <meta property="og:image" content="{{ .Site.Params.og_image }}">
+        {{- if .Site.Params.og_image_alt }}
+            <meta property="og:image:alt" content="{{ .Site.Params.og_image_alt }}">
+        {{- end }}
+    {{- end }}
+{{- end }}
 {{ define "main" }}
 <div class="govuk-width-container">
     <main class="govuk-main-wrapper" id="main-content">
@@ -29,18 +51,18 @@
             <div class="govuk-grid-row">
                 <address class="govuk-grid-column-two-thirds">
                     <table class="govuk-table">
-                        {{ range (sort .Site.Params.contact "weight") }}
-                        <tr>
-                            <td class="govuk-table__cell">
-                                {{ T .method }}
-                            </td>
-                            <td class="app-contact-list-item">
-                                <a href="{{ .url }}" rel="me">
-                                    <i aria-hidden="true" class="{{ .icon }}"></i>
-                                    <span class="app-contact-list-item-text">{{ .text }}</span>
-                                </a>
-                            </td>
-                        </tr>
+                        {{- range sort (where .Site.Params.contact "hidden" "ne" true) "weight" }}
+                            <tr>
+                                <td class="govuk-table__cell">
+                                    {{ T .method }}
+                                </td>
+                                <td class="app-contact-list-item">
+                                    <a href="{{ .url }}" rel="me">
+                                        <i aria-hidden="true" class="{{ .icon }}"></i>
+                                        <span class="app-contact-list-item-text">{{ .text }}</span>
+                                    </a>
+                                </td>
+                            </tr>
                         {{ end }}
                     </table>
                 </address>

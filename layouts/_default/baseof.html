@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
-<head profile="http://gmpg.org/xfn/11">
+<html
+        lang="{{ or site.Language.LanguageCode site.Language.Lang }}"
+        dir="{{ or site.Language.LanguageDirection `ltr` }}"
+        prefix="foaf: http://xmlns.com/foaf/0.1/
+                dc: http://purl.org/dc/terms/
+                og: https://ogp.me/ns#
+                article: https://ogp.me/ns/article#
+                profile: https://ogp.me/ns/profile#">
+<head>
   {{ partial "head.html" . }}
+  {{ block "head" . }}{{ end }}
 </head>
 <body class="govuk-template__body">
   <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>

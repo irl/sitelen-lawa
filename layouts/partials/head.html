@@ -1,7 +1,10 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ hugo.Generator }}
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
-{{ partialCached "css.html" . }}
-
-<meta property="og:title" content="{{ .Title }}">
+<link rel="canonical" href="{{ .Permalink }}">
 <meta property="og:url" content="{{ .Permalink }}">
+{{- range where .Site.Params.contact "hidden" true }}
+<link rel="me" href="{{ .url }}" title="{{ .method }}: {{ .text }}">
+{{- end }}
+{{ partialCached "css.html" . }}

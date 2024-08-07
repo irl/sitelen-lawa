@@ -1,4 +1,4 @@
-
+gay = true
 
 [[contact]]
 weight = 10
@@ -13,6 +13,13 @@ method = "Discord"
 icon = "lab la-discord"
 text = "irlxyz"
 url = "https://discord.com/users/716273985637318666"
+
+[[contact]]
+weight = 100
+method = "GitHub"
+text = "irl"
+url = "https://github.com/irl"
+hidden = true
 
 [[friends]]
 weight = 10

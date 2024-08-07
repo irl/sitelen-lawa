@@ -26,7 +26,6 @@ relativeURLs = true
       [languages.tok.params.author]
         name = "jan lukin"
 
-
 [module]
   [module.hugoVersion]
     extended = true
@@ -53,4 +52,3 @@ relativeURLs = true
 [[module.mounts]]
     source = "node_modules/line-awesome/dist/line-awesome/fonts"
     target = "static/fonts"
-

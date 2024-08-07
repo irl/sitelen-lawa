@@ -71,7 +71,7 @@
 <address aria-describedby="app-sidebar-contact-heading" class="app-sidebar-section">
     <h1 class="govuk-heading-s" id="sidebar-contact-heading">{{ T "Contact" }}</h1>
     <ul class="app-links-list">
-        {{ range (sort .Site.Params.contact "weight") }}
+        {{- range sort (where .Site.Params.contact "hidden" "ne" true) "weight" }}
         <li class="app-links-list-item">
             <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
                 <i aria-hidden="true" class="{{ .icon }}"></i>
