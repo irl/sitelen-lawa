@@ -1,7 +1,50 @@
 <div class="govuk-width-container">
   <div class="govuk-footer__meta">
     <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-      <p>Copyright {{ now.Year }}. All rights reserved.</p>
+      {{- $page := . }}
+      {{- with .Site.Menus.footer }}
+      <h2 class="govuk-visually-hidden">Support links</h2>
+      <ul class="govuk-footer__inline-list">
+        {{- range . }}
+          {{- $attrs :=  dict "class" "govuk-footer__inline-list-item" }}
+          {{- if $page.IsMenuCurrent .Menu . }}
+            {{- $attrs = dict "class" "govuk-footer__inline-list-item" "aria-current" "page" }}
+          {{- end }}
+          {{- $name := .Name }}
+          {{- with .Identifier }}
+            {{- with T . }}
+              {{- $name = . }}
+            {{- end }}
+          {{- end }}
+          <li
+                  {{- range $k, $v := $attrs }}
+                  {{- with $v }}
+                  {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+          {{- end -}}>
+          <a class="govuk-footer__link" href="{{ relLangURL .URL }}"
+          >{{ $name }}</a>
+          </li>
+        {{- end }}
+      </ul>
+      {{- end }}
+      <p class="govuk-footer__licence-description govuk-!-margin-bottom-0">
+        {{ T "footer_licence" | safeHTML }}
+      </p>
+      {{- if not .Site.Params.footer_image }}
+      <p class="govuk-footer__licence-description govuk-!-margin-bottom-0">
+        {{ T "Copyright" }} &copy; {{ .Site.Params.author.name }} {{ now.Year }}.
+      </p>
+      {{- end }}
+      <p class="govuk-footer__licence-description govuk-!-margin-bottom-0">
+        {{ T "footer_acknowledgements" | safeHTML }}
+      </p>
     </div>
+    {{- if .Site.Params.footer_image }}
+    <div class="govuk-footer__meta-item">
+      <img src="{{ .Site.Params.footer_image }}" class="govuk-footer__licence-logo" alt="{{ .Site.Params.footer_image_alt }}">
+        {{ T "Copyright" }} &copy; {{ .Site.Params.author.name }} {{ now.Year }}.
+    </div>
+    {{- end }}
   </div>
 </div>

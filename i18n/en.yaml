@@ -21,3 +21,23 @@ Share with: Share with
 phase_banner_text: This is a new website. Help me improve it and <a href="{{ .feedback_url }}" rel="noopener" target="_blank">give your feedback (opens in a new tab)</a>.
 Alpha: Alpha
 Beta: Beta
+Copyright: Copyright
+footer_acknowledgements: |
+  This website is powered by <a class="govuk-footer__link" href="https://gohugo.io/">Hugo</a> and the <a class="govuk-footer__link" href="https://irl.github.io/sitelen-lawa/">sitelen-lawa</a> theme.
+  The theme is built with components from <a class="govuk-footer__link" href="https://frontend.design-system.service.gov.uk/">GOV.UK Frontend</a> and <a class="govuk-footer__link" href="https://design.tax.service.gov.uk/hmrc-design-patterns/install-hmrc-frontend-in-your-prototype/">HMRC Frontend</a>.
+  The theme uses the <a class="govuk-footer__link" href="https://rsms.me/inter/">Inter</a> typeface and icons from <a class="govuk-footer__link" href="https://icons8.com/line-awesome">Line Awesome</a>.
+  All of these components are used under the terms of their respective permissive open source licenses.
+footer_licence: |
+  <i class="lab la-creative-commons" aria-hidden="true"></i>
+  <i class="lab la-creative-commons-by" aria-hidden="true"></i>
+  <br>
+  All content is available under the
+  <a
+          class="govuk-footer__link"
+          href="https://creativecommons.org/licenses/by/4.0/"
+          rel="license">Creative Commons Attribution 4.0 International licence</a>,
+  and code samples under the
+  <a
+          class="govuk-footer__link"
+          href="https://opensource.org/license/bsd-2-clause">2-Clause BSD licence</a>,
+  except where otherwise stated.
