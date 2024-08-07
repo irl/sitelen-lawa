@@ -18,3 +18,6 @@ Tumblr: Tumblr
 Copy to clipboard: Copy to clipboard
 More: More
 Share with: Share with
+phase_banner_text: This is a new website. Help me improve it and <a href="{{ .feedback_url }}" rel="noopener" target="_blank">give your feedback (opens in a new tab)</a>.
+Alpha: Alpha
+Beta: Beta

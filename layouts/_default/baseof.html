@@ -18,16 +18,18 @@
     {{ partial "header.html" . }}
   </header>
   <div class="govuk-width-container">
+    {{ with .Site.Params.phase_banner }}
     <div class="govuk-phase-banner">
       <p class="govuk-phase-banner__content">
         <strong class="govuk-tag govuk-phase-banner__content__tag">
-          Alpha
+          {{ T .phase }}
         </strong>
         <span class="govuk-phase-banner__text">
-        This is a website.
-      </span>
+          {{ safeHTML (T "phase_banner_text" (dict "feedback_url" .feedback_url)) }}
+        </span>
       </p>
     </div>
+    {{- end }}
     {{- if .Translations }}
     <nav class="hmrc-language-select" aria-label="Language switcher">
       <ul class="hmrc-language-select__list">

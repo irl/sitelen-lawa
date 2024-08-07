@@ -1,5 +1,9 @@
 gay = true
 
+[phase_banner]
+phase = "Alpha"
+feedback_url = "https://github.com/irl/sitelen-lawa/issues/new"
+
 [[contact]]
 weight = 10
 method = "Email"
