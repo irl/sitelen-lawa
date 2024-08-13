@@ -1,0 +1,55 @@
+.app-content {
+  h1 {
+    @extend .govuk-heading-xl;
+  }
+
+  h2 {
+    @extend .govuk-heading-l;
+  }
+
+  h3 {
+    @extend .govuk-heading-m;
+  }
+
+  h4 {
+    @extend .govuk-heading-s;
+  }
+
+  h5 {
+    @extend .govuk-heading-s;
+    @extend .govuk-\!-font-size-16;
+  }
+
+  h6 {
+    @extend .govuk-heading-s;
+    @extend .govuk-\!-font-size-16;
+    font-style: italic;
+  }
+
+  p {
+    @extend .govuk-body;
+  }
+
+  ul {
+    @extend .govuk-list;
+    @extend .govuk-list--bullet;
+  }
+
+  ol {
+    @extend .govuk-list;
+    @extend .govuk-list--number;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  pre {
+    width: 100%;
+    overflow: auto;
+  }
+
+  table {
+    @extend .govuk-table;
+  }
+}
