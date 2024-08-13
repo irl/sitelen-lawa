@@ -56,6 +56,8 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --themesDir ../..
+        working-directory: ./exampleSite
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

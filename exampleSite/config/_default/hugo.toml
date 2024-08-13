@@ -1,6 +1,7 @@
 baseURL = 'https://irl.github.io/'
 title = 'sitelen lawa'
 relativeURLs = true
+theme = 'sitelen-lawa'
 
 [languages]
   [languages.en]
