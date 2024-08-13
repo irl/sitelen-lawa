@@ -41,3 +41,15 @@ footer_licence: |
           class="govuk-footer__link"
           href="https://opensource.org/license/bsd-2-clause">2-Clause BSD licence</a>,
   except where otherwise stated.
+one_year_old: |
+  This blog post is more than two years old.
+  It is preserved here in the hope that it is useful to someone, but please be
+  aware that links may be broken and that opinions expressed here may not reflect
+  my current views. If this is a technical article, it may no longer reflect
+  current best practice.
+two_years_old: |
+  This blog post is more than a year old.
+  It is preserved here in the hope that it is useful to someone, but please be
+  aware that links may be broken and that opinions expressed here may not reflect
+  my current views. If this is a technical article, it may no longer reflect
+  current best practice.

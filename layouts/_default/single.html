@@ -39,7 +39,24 @@
                     <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
                 </p>
                 {{- partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-                <div class="govuk-body">
+                {{ if (le .Date (now.AddDate -2 0 0)) }}
+                <div class="govuk-warning-text govuk-!-margin-top-4">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-visually-hidden">{{ T "Warning" }}</span>
+                    {{ T "one_year_old" }}
+                    </strong>
+                </div>
+                {{ else if (le .Date (now.AddDate -1 0 0 )) }}
+                <div class="govuk-warning-text govuk-!-margin-top-4">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-visually-hidden">Warning</span>
+                    {{ T "two_years_old" }}
+                    </strong>
+                </div>
+                {{ end }}
+                <div class="app-content">
                     {{- .Content }}
                 </div>
                 <nav class="govuk-pagination govuk-pagination--block" aria-label="Pagination">
