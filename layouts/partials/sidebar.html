@@ -15,12 +15,32 @@
         </li>
 
         <li class="app-links-list-item">
+            <a href="https://reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener">
+                <i aria-hidden="true" class="fa-brands fa-fw fa-reddit"></i>
+                <span class="app-links-list-item-text">
+                        <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
+                        {{ T "Reddit" }}
+                    </span>
+            </a>
+        </li>
+
+        <li class="app-links-list-item">
             <a href="https://twitter.com/share?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener">
                 <i aria-hidden="true" class="fa-brands fa-fw fa-twitter"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "Twitter" }}
                 </span>
+            </a>
+        </li>
+
+        <li class="app-links-list-item">
+            <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener">
+                <i aria-hidden="true" class="fa-brands fa-fw fa-linkedin"></i>
+                <span class="app-links-list-item-text">
+                        <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
+                        {{ T "LinkedIn" }}
+                    </span>
             </a>
         </li>
 
@@ -33,15 +53,7 @@
                 </span>
             </a>
         </li>
-        <li class="app-links-list-item">
-            <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener">
-                <i aria-hidden="true" class="fa-brands fa-fw fa-linkedin"></i>
-                <span class="app-links-list-item-text">
-                    <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
-                    {{ T "LinkedIn" }}
-                </span>
-            </a>
-        </li>
+
         <li class="app-links-list-item">
             <a href="https://www.tumblr.com/share/link?url={{ .Permalink }}&name={{ .Title }}&description={{ .Summary | strings.Truncate 50 }}" target="_blank" rel="noopener">
                 <i aria-hidden="true" class="fa-brands fa-fw fa-tumblr"></i>
@@ -49,6 +61,26 @@
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "Tumblr" }}
                 </span>
+            </a>
+        </li>
+
+        <li class="app-links-list-item">
+            <a href="https://telegram.me/share/url?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener">
+                <i aria-hidden="true" class="fa-brands fa-fw fa-telegram"></i>
+                <span class="app-links-list-item-text">
+                        <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
+                        {{ T "Telegram" }}
+                    </span>
+            </a>
+        </li>
+
+        <li class="app-links-list-item">
+            <a href="https://news.ycombinator.com/submitlink?u={{ .Permalink }}&t={{ .Title }}" target="_blank" rel="noopener">
+                <i aria-hidden="true" class="fa-brands fa-fw fa-hacker-news"></i>
+                <span class="app-links-list-item-text">
+                        <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
+                        {{ T "Hacker News" }}
+                    </span>
             </a>
         </li>
     </ul>
