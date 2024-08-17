@@ -1,3 +1,14 @@
+.app-contact-list-label {
+  @extend .govuk-table__cell;
+  width: 128px;
+}
+
+@media (min-width:40.0625em) {
+  .app-contact-list-label {
+    width: 170px;
+  }
+}
+
 .app-contact-list-item {
   @extend .govuk-table__cell;
   padding: 0;

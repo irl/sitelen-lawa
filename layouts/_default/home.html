@@ -43,6 +43,7 @@
                 {{- end }}
             </div>
         </section>
+        {{- with .Site.Params.contact }}
         <section class="app-home-section">
             <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-3">{{ T "Contact" }}</h2>
             <p class="govuk-body">
@@ -51,9 +52,9 @@
             <div class="govuk-grid-row">
                 <address class="govuk-grid-column-two-thirds">
                     <table class="govuk-table">
-                        {{- range sort (where .Site.Params.contact "hidden" "ne" true) "weight" }}
+                        {{- range sort (where . "hidden" "ne" true) "weight" }}
                             <tr>
-                                <td class="govuk-table__cell">
+                                <td class="app-contact-list-label">
                                     {{ T .method }}
                                 </td>
                                 <td class="app-contact-list-item">
@@ -68,6 +69,34 @@
                 </address>
             </div>
         </section>
+        {{- end }}
+        {{- with .Site.Params.support }}
+        <section class="app-home-section">
+            <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-3">{{ T "Support" }}</h2>
+            <p class="govuk-body">
+                {{ T "You can support me with any of the following methods:" }}
+            </p>
+            <div class="govuk-grid-row">
+                <address class="govuk-grid-column-two-thirds">
+                    <table class="govuk-table">
+                        {{- range sort . "weight" }}
+                        <tr>
+                            <td class="app-contact-list-label">
+                                {{ T .method }}
+                            </td>
+                            <td class="app-contact-list-item">
+                                <a href="{{ .url }}" rel="me">
+                                    <i aria-hidden="true" class="fa-fw {{ .icon }}"></i>
+                                    <span class="app-contact-list-item-text">{{ .text }}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {{ end }}
+                    </table>
+                </address>
+            </div>
+        </section>
+        {{- end }}
         <section class="app-home-section">
             <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-bottom-3">{{ T "Friends" }}</h2>
             <p class="govuk-body">

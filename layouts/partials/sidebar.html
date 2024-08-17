@@ -87,6 +87,42 @@
 </aside>
 {{ end }}
 
+{{- with .Site.Params.contact }}
+<address aria-describedby="app-sidebar-contact-heading" class="app-sidebar-section">
+    <h1 class="govuk-heading-s" id="sidebar-contact-heading">{{ T "Contact" }}</h1>
+    <ul class="app-links-list">
+        {{- range sort (where . "hidden" "ne" true) "weight" }}
+        <li class="app-links-list-item">
+            <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
+                <i aria-hidden="true" class="fa-fw {{ .icon }}"></i>
+                <span class="app-links-list-item-text">
+                    {{ .text }}
+                </span>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+</address>
+{{- end }}
+
+{{- with .Site.Params.support }}
+<aside aria-describedby="app-sidebar-support-heading" class="app-sidebar-section">
+    <h1 class="govuk-heading-s" id="sidebar-support-heading">{{ T "Support" }}</h1>
+    <ul class="app-links-list">
+        {{- range sort . "weight" }}
+        <li class="app-links-list-item">
+            <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
+                <i aria-hidden="true" class="fa-fw {{ .icon }}"></i>
+                <span class="app-links-list-item-text">
+                    {{ .text }}
+                </span>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+</aside>
+{{- end }}
+
 <nav aria-describedby="app-sidebar-friends-heading" class="app-sidebar-section">
     <h1 class="govuk-heading-s" id="app-sidebar-friends-heading">{{ T "Friends" }}</h1>
     <ul class="app-links-list">
@@ -100,19 +136,3 @@
         {{ end }}
     </ul>
 </nav>
-
-<address aria-describedby="app-sidebar-contact-heading" class="app-sidebar-section">
-    <h1 class="govuk-heading-s" id="sidebar-contact-heading">{{ T "Contact" }}</h1>
-    <ul class="app-links-list">
-        {{- range sort (where .Site.Params.contact "hidden" "ne" true) "weight" }}
-        <li class="app-links-list-item">
-            <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
-                <i aria-hidden="true" class="fa-fw {{ .icon }}"></i>
-                <span class="app-links-list-item-text">
-                    {{ .text }}
-                </span>
-            </a>
-        </li>
-        {{ end }}
-    </ul>
-</address>
