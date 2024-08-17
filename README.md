@@ -25,5 +25,5 @@ for toki pona: "o ante e toki tawa toki pona".
 ## Acknowledgements
 
 * GOV.UK Design System team
-* Line Awesome
+* Font Awesome
 * Inter

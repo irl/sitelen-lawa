@@ -58,7 +58,7 @@
                                 </td>
                                 <td class="app-contact-list-item">
                                     <a href="{{ .url }}" rel="me">
-                                        <i aria-hidden="true" class="{{ .icon }}"></i>
+                                        <i aria-hidden="true" class="fa-fw {{ .icon }}"></i>
                                         <span class="app-contact-list-item-text">{{ .text }}</span>
                                     </a>
                                 </td>
@@ -79,7 +79,7 @@
                         {{ range (sort .Site.Params.friends "weight") }}
                         <li class="app-links-list-item">
                             <a href="{{ .url }}" rel="{{ delimit .xfn " " }}">
-                            <i class="{{ if .icon }}{{ .icon }}{{ else }}las la-user{{ end }}" aria-hidden="true"></i>
+                            <i class="fa-fw {{ if .icon }}{{ .icon }}{{ else }}fa-regular fa-user{{ end }}" aria-hidden="true"></i>
                             <span class="app-links-list-item-text">{{ .name }}</span>
                             <span class="govuk-visually-hidden">XFN tags:</span>
                             {{ range .xfn }}

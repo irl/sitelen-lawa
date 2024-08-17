@@ -42,14 +42,11 @@ theme = 'sitelen-lawa'
     source = "node_modules/inter-ui/inter.css"
     target = "assets/css/inter.css"
 [[module.mounts]]
-    source = "node_modules/line-awesome/dist/line-awesome/css"
-    target = "assets/css"
-[[module.mounts]]
     source = "static"
     target = "static"
 [[module.mounts]]
     source = "node_modules/inter-ui/web"
     target = "static/css/web"
 [[module.mounts]]
-    source = "node_modules/line-awesome/dist/line-awesome/fonts"
+    source = "node_modules/@fortawesome/fontawesome-free/webfonts"
     target = "static/fonts"

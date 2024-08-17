@@ -1,6 +1,6 @@
 {{- $options := dict "targetPath" "css/site.css" -}}
 {{- with resources.Get "scss/main.scss" | toCSS $options -}}
-  {{- $css := slice . (resources.Get "css/line-awesome.css") (resources.Get "css/inter.css") -}}
+  {{- $css := slice . (resources.Get "css/inter.css") -}}
   {{- with $css | resources.Concat "css/style.css" -}}
     {{- if eq hugo.Environment "development" -}}
       <link rel="stylesheet" href="{{ .RelPermalink }}">

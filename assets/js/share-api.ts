@@ -10,7 +10,7 @@ export function addNativeShareOption(shareList) {
     const shareData = getShareData();
     if (navigator.canShare && navigator.canShare(shareData)) {
         const item = createShareOption("app-share-native",
-            "las la-share", shareList.dataset.moreText, shareWithApi);
+            "fa-regular fa-fw fa-share", shareList.dataset.moreText, shareWithApi);
         shareList.insertAdjacentElement('beforeend', item);
     }
 }

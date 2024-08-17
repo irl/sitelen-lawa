@@ -10,6 +10,6 @@ async function shareWithClipboard() {
 
 export function addClipboardShareOption(shareList) {
     const item = createShareOption("app-share-clipboard",
-        "las la-clipboard", shareList.dataset.copyText, shareWithClipboard);
+        "fa-regular fa-fw fa-clipboard", shareList.dataset.copyText, shareWithClipboard);
     shareList.insertAdjacentElement('afterbegin', item);
 }

@@ -1,11 +1,20 @@
-$govuk-include-default-font-face: false;
-$govuk-font-family: Inter, Arial, sans-serif;
-
+/* User overrides */
 @import "overrides.scss";
 
+/* GOV.UK Design System */
+$govuk-include-default-font-face: false !default;
+$govuk-font-family: Inter, Arial, sans-serif !default;
 @import "node_modules/govuk-frontend/dist/govuk/all";
 @import "node_modules/hmrc-frontend/hmrc/components/language-select/_language-select.scss";
 
+/* Font Awesome */
+$fa-font-path: "../fonts/" !default;
+@import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "node_modules/@fortawesome/fontawesome-free/scss/regular";
+@import "node_modules/@fortawesome/fontawesome-free/scss/solid";
+
+/* Theme Styles */
 @import "_base.scss";
 @import "_contact-list.scss";
 @import "_header.scss";
@@ -15,4 +24,5 @@ $govuk-font-family: Inter, Arial, sans-serif;
 @import "_text.scss";
 @import "_content.scss";
 
+/* User Styles */
 @import "styles.scss";

@@ -6,16 +6,17 @@
     <ul class="app-links-list" id="app-share-list" data-copy-text="{{ T "Copy to clipboard" }}" data-more-text="{{ T "More" }}">
         <li class="app-links-list-item">
             <a href="https://www.facebook.com/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener">
-                <i aria-hidden="true" class="lab la-facebook"></i>
+                <i aria-hidden="true" class="fa-brands fa-fw fa-facebook"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "Facebook" }}
                 </span>
             </a>
         </li>
+
         <li class="app-links-list-item">
             <a href="https://twitter.com/share?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener">
-                <i aria-hidden="true" class="lab la-twitter"></i>
+                <i aria-hidden="true" class="fa-brands fa-fw fa-twitter"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "Twitter" }}
@@ -25,7 +26,7 @@
 
         <li class="app-links-list-item">
             <a href="https://api.whatsapp.com/send?text={{ .Title }}%20{{ .Permalink }}" target="_blank" rel="noopener">
-                <i aria-hidden="true" class="lab la-whatsapp"></i>
+                <i aria-hidden="true" class="fa-brands fa-fw fa-facebook"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "WhatsApp" }}
@@ -34,7 +35,7 @@
         </li>
         <li class="app-links-list-item">
             <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener">
-                <i aria-hidden="true" class="lab la-linkedin"></i>
+                <i aria-hidden="true" class="fa-brands fa-fw fa-linkedin"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "LinkedIn" }}
@@ -43,7 +44,7 @@
         </li>
         <li class="app-links-list-item">
             <a href="https://www.tumblr.com/share/link?url={{ .Permalink }}&name={{ .Title }}&description={{ .Summary | strings.Truncate 50 }}" target="_blank" rel="noopener">
-                <i aria-hidden="true" class="lab la-tumblr"></i>
+                <i aria-hidden="true" class="fa-brands fa-fw fa-tumblr"></i>
                 <span class="app-links-list-item-text">
                     <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
                     {{ T "Tumblr" }}
@@ -60,7 +61,7 @@
         {{ range (sort .Site.Params.friends "weight") }}
         <li class="app-links-list-item">
             <a href="{{ .url }}" rel="{{ delimit .xfn ' ' }}">
-                <i aria-hidden="true" class="{{ if .icon }}{{ .icon }}{{ else }}las la-user{{ end }}"></i>
+                <i aria-hidden="true" class="fa-fw {{ if .icon }}{{ .icon }}{{ else }}fa-regular fa-user{{ end }}"></i>
                 <span class="app-links-list-item-text">{{ .name }}</span>
             </a>
         </li>
@@ -74,7 +75,7 @@
         {{- range sort (where .Site.Params.contact "hidden" "ne" true) "weight" }}
         <li class="app-links-list-item">
             <a aria-label="{{ .method }}" href="{{ .url }}" rel="me">
-                <i aria-hidden="true" class="{{ .icon }}"></i>
+                <i aria-hidden="true" class="fa-fw {{ .icon }}"></i>
                 <span class="app-links-list-item-text">
                     {{ .text }}
                 </span>
