@@ -55,6 +55,16 @@
         </li>
 
         <li class="app-links-list-item">
+            <a href="https://bsky.app/intent/compose?text={{ .Title }} {{ .Permalink }}" target="_blank" rel="noopener">
+                <i aria-hidden="true" class="fa-brands fa-fw fa-bluesky"></i>
+                <span class="app-links-list-item-text">
+                                <span class="govuk-visually-hidden">{{ T "Share with" }}</span>
+                                {{ T "Bluesky" }}
+                </span>
+            </a>
+        </li>
+
+        <li class="app-links-list-item">
             <a href="https://www.tumblr.com/share/link?url={{ .Permalink }}&name={{ .Title }}&description={{ .Summary | strings.Truncate 50 }}" target="_blank" rel="noopener">
                 <i aria-hidden="true" class="fa-brands fa-fw fa-tumblr"></i>
                 <span class="app-links-list-item-text">
