@@ -1,3 +1,11 @@
+.app-content-column {
+  @extend .govuk-grid-column-two-thirds;
+}
+
+.app-sidebar-column {
+  @extend .govuk-grid-column-one-third;
+}
+
 .app-content {
   h1 {
     @extend .govuk-heading-xl;

@@ -1,0 +1,37 @@
+@media print {
+  @page {
+    size: A4;
+  }
+
+  .govuk-header__logotype,
+  .govuk-heading-s,
+  .govuk-heading-m,
+  .govuk-heading-l,
+  .govuk-heading-xl,
+  .govuk-body,
+  .govuk-body-s,
+  .govuk-list,
+  .govuk-tag,
+  .govuk-footer__licence-description,
+  .govuk-footer__link {
+    font-family: "Libre Baskerville", serif;
+  }
+
+  .govuk-header__content,
+  .govuk-phase-banner,
+  .hmrc-language-select,
+  .govuk-button,
+  .app-sidebar-column,
+  .govuk-pagination {
+    display: none;
+  }
+
+  .app-breadcrumbs-no-language-switcher {
+    padding-top: 0;
+  }
+
+  .app-content-column {
+    width: 100%;
+    float: none;
+  }
+}

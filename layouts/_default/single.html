@@ -31,7 +31,7 @@
     {{ partial "breadcrumb.html" . }}
     <main class="govuk-main-wrapper" id="main-content">
         <div class="govuk-grid-row">
-            <div class="govuk-grid-column-two-thirds">
+            <div class="app-content-column">
                 <h1 class="govuk-heading-xl">{{ .Title }}</h1>
                 <p class="govuk-body-s app-muted">
                     {{ $dateMachine := .PublishDate | time.Format "2006-01-02T15:04:05-07:00" }}
@@ -91,7 +91,7 @@
                     {{- end }}
                 </nav>
             </div>
-            <div class="govuk-grid-column-one-third">
+            <div class="app-sidebar-column">
                 {{ partial "sidebar.html" . }}
             </div>
         </div>

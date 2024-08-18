@@ -14,6 +14,9 @@ $fa-font-path: "../fonts/" !default;
 @import "node_modules/@fortawesome/fontawesome-free/scss/regular";
 @import "node_modules/@fortawesome/fontawesome-free/scss/solid";
 
+/* Libre Baskerville */
+@import "node_modules/@fontsource/libre-baskerville";
+
 /* Theme Styles */
 @import "_base.scss";
 @import "_contact-list.scss";
@@ -23,6 +26,7 @@ $fa-font-path: "../fonts/" !default;
 @import "_sidebar.scss";
 @import "_text.scss";
 @import "_content.scss";
+@import "_print.scss";
 
 /* User Styles */
 @import "styles.scss";

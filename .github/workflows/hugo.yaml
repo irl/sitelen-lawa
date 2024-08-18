@@ -46,7 +46,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
-        run: "npm install govuk-frontend hmrc-frontend inter-ui line-awesome"
+        run: "npm install govuk-frontend hmrc-frontend inter-ui @fortawesome/fontawesome-free @fontsource/libre-baskerville"
         working-directory: ./exampleSite
       - name: Build with Hugo
         env:
