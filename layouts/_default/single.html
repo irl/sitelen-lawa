@@ -2,7 +2,7 @@
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     <meta property="article:published_time" content="{{ .PublishDate.Format "2006-01-02T15:04:05Z0700" }}">
-    <meta property="article:modified_time" content="{{ .Date.Format "2006-01-02T15:04:05Z0700" }}">
+    <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z0700" }}">
     <meta property="article:author" content="{{ .Site.BaseURL | absLangURL }}">
     <meta property="article:section" content="{{ (.Site.GetPage "section" .Section).Title }}">
     {{- range .GetTerms "tags" }}
@@ -33,10 +33,10 @@
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
                 <h1 class="govuk-heading-xl">{{ .Title }}</h1>
-                <p class="govuk-body-s govuk-!-margin-bottom-1 app-muted">
-                    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-                    {{ $dateHuman := .Date | time.Format ":date_long" }}
-                    <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+                <p class="govuk-body-s app-muted">
+                    {{ $dateMachine := .PublishDate | time.Format "2006-01-02T15:04:05-07:00" }}
+                    {{ $dateHuman := .PublishDate | time.Format ":date_long" }}
+                    {{ T "Published" }}: <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
                 </p>
                 {{- partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
                 {{ if (le .Date (now.AddDate -2 0 0)) }}
