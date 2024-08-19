@@ -33,13 +33,8 @@ export function createShareOption(id, icon, text, handler) {
 }
 
 export function setupShareOptions() {
-    try {
-        const shareList = document.querySelector("#app-share-list");
-        addClipboardShareOption(shareList);
-        addNativeShareOption(shareList);
-    } catch (e) {
-        if (!(e instanceof DOMException)) {
-            console.error(e);
-        }
-    }
+    const shareList = document.querySelector("#app-share-list");
+    if (!shareList) return;
+    addClipboardShareOption(shareList);
+    addNativeShareOption(shareList);
 }
