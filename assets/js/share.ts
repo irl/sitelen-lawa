@@ -1,10 +1,12 @@
 import {addNativeShareOption} from "./share-api";
 import {addClipboardShareOption} from "./share-clipboard";
+import {addFediShareOption} from "./share-fediverse";
 
 export function getShareData() {
     return {
+        url: document.querySelector("meta[property='og:url']").getAttribute('content'),
         title: document.querySelector("meta[property='og:title']").getAttribute('content'),
-        url: document.querySelector("meta[property='og:url']").getAttribute('content')
+        description: document.querySelector("meta[property='og:description']").getAttribute('content'),
     };
 }
 
@@ -36,5 +38,6 @@ export function setupShareOptions() {
     const shareList = document.querySelector("#app-share-list");
     if (!shareList) return;
     addClipboardShareOption(shareList);
+    addFediShareOption(shareList);
     addNativeShareOption(shareList);
 }

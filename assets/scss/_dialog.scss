@@ -1,0 +1,46 @@
+.app-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 20px;
+  z-index: 1000;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 1);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  max-width: 100%;
+  transform: translate(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.app-modal__content {
+  @extend .govuk-form-group;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.app-modal__content h1 {
+  margin-top: 0;
+}
+
+.app-modal__content input[type="text"] {
+  margin-bottom: 10px;
+}
+
+.app-modal__content .govuk-checkboxes__item {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .app-modal {
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    right: auto;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    border-radius: 4px;
+  }
+}
