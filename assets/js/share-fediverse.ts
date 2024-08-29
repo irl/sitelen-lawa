@@ -12,11 +12,13 @@ const shareUrls = {
     "gnusocial": "notice/new?status_textarea={text}",
     "hometown": "share?text={text}",
     "hubzilla": "rpost?title={title}&body={description}%0A{url}",
+    "iceshrimp": "share?text={text}",
     "kbin": "new/link?url={url}",
     "mastodon": "share?text={text}",
     "meisskey": "share?text={text}",
     "microdotblog": "post?text=[{title}]({url})%0A%0A{description}",
-    "misskey": "share?text={text}"
+    "misskey": "share?text={text}",
+    "sharkey": "share?text={text}"
 }
 
 async function getNodeInfo(domain: string) {
