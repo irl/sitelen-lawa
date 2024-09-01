@@ -1,4 +1,4 @@
-{{- with resources.Get "js/govuk-frontend.min.js" }}
+{{- with slice (resources.Get "js/govuk-frontend.min.js") | resources.Concat "/js/govuk-frontend.min.js" }}
   {{- with . | fingerprint }}
     <script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
     <script type="module">

@@ -1,4 +1,5 @@
 import {createShareOption, getShareData} from "./share";
+import {addButtonHandler} from "./button";
 
 const shareUrls = {
     /* Thanks https://palant.info/2023/10/19/implementing-a-share-on-mastodon-button-for-a-blog/ */
@@ -84,7 +85,7 @@ function showModal() {
         </div>
     `;
 
-    const storedDomain = localStorage.getItem("fediverse-instance");
+    const storedDomain = localStorage.getItem("share-fedi-instance-domain");
     if (storedDomain) {
         document.getElementById("app-share-fedi-dialog__domain").value = storedDomain;
         document.getElementById("app-share-fedi-dialog__save").checked = true;
@@ -95,9 +96,9 @@ function showModal() {
     const domainInput = document.getElementById('app-share-fedi-dialog__domain');
     domainInput.addEventListener('keydown', async (e) => {
         if (e.key === 'Enter') {
-            await shareWithFedi();
             e.preventDefault();
             e.stopPropagation();
+            await shareWithFedi();
             return false;
         }
     })
@@ -105,42 +106,18 @@ function showModal() {
     const saveInput = document.getElementById('app-share-fedi-dialog__save');
     saveInput.addEventListener('keydown', async (e) => {
         if (e.key === 'Enter') {
-            await shareWithFedi();
             e.preventDefault();
             e.stopPropagation();
+            await shareWithFedi();
             return false;
         }
     })
 
     const shareButton = document.getElementById('app-share-fedi-dialog__share');
-    shareButton.addEventListener('click', async (e) => {
-        await shareWithFedi();
-        e.preventDefault();
-        return false;
-    })
-    shareButton.addEventListener('keydown', async (e) => {
-        if (e.key === 'Space') {
-            await shareWithFedi();
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-        }
-    });
+    addButtonHandler(shareButton, shareWithFedi);
 
     const cancelButton = document.getElementById('app-share-fedi-dialog__cancel');
-    cancelButton.addEventListener('click', (e) => {
-        closeModal();
-        e.preventDefault();
-        return false;
-    });
-    cancelButton.addEventListener('keydown', (e) => {
-        if (e.key === 'Space') {
-            closeModal();
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-        }
-    });
+    addButtonHandler(cancelButton, closeModal);
 }
 
 function closeModal() {
@@ -187,6 +164,18 @@ async function shareWithFedi() {
         return false;
     }
     const nodeInfo = await getNodeInfo(instanceDomain);
+    if (nodeInfo?.software?.name == "pleroma") {
+        if (document.getElementById('app-share-fedi-dialog__save').checked) {
+            localStorage.setItem("share-fedi-instance-domain", instanceDomain);
+        } else {
+            localStorage.removeItem("share-fedi-instance-domain");
+        }
+        sessionStorage.setItem('share-fedi-instance-url', `https://${instanceDomain}`);
+        sessionStorage.setItem('share-fedi-instance-domain', instanceDomain);
+        sessionStorage.setItem('share-fedi-return-url', window.location.origin + window.location.pathname);
+        sessionStorage.setItem('share-fedi-text', `${shareData.title} - ${shareData.url}`);
+        window.location.href = '/share/fediverse/';
+    }
     if (!nodeInfo?.software?.name || !(nodeInfo.software.name in shareUrls)) {
         const modal = document.getElementById('app-share-fedi-dialog');
         modal.innerHTML = `
@@ -198,26 +187,14 @@ async function shareWithFedi() {
             </div>
         `;
         const cancelButton = document.getElementById('app-share-fedi-dialog__cancel');
-        cancelButton.addEventListener('click', (e) => {
-            closeModal();
-            e.preventDefault();
-            return false;
-        });
-        cancelButton.addEventListener('keydown', (e) => {
-            if (e.key === 'Space') {
-                closeModal();
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-        });
+        addButtonHandler(cancelButton, closeModal);
         cancelButton.focus();
         return false;
     }
     if (document.getElementById('app-share-fedi-dialog__save').checked) {
-        localStorage.setItem("fediverse-instance", instanceDomain);
+        localStorage.setItem("share-fedi-instance-domain", instanceDomain);
     } else {
-        localStorage.removeItem("fediverse-instance");
+        localStorage.removeItem("share-fedi-instance-domain");
     }
     closeModal();
     window.open(

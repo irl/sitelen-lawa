@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post to Fediverse</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="govuk-template__body">
+<script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper govuk-!-margin-top-4" id="main-content" role="main">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+
+                <div class="govuk-panel govuk-panel--confirmation">
+                    <h1 class="govuk-panel__title">
+                        Logged in
+                    </h1>
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-one-quarter">
+                            <img src="avatar_url.jpg" alt="Avatar" class="govuk-image" id="avatar"
+                                 style="width: 100%; height: auto;">
+                        </div>
+                        <div class="govuk-grid-column-three-quarters">
+                            <p class="govuk-panel__body govuk-!-font-size-48 govuk-!-margin-2" id="display-name"></p>
+                            <p class="govuk-panel__body govuk-!-margin-2">Handle: <span id="handle"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="#" method="post">
+                    <div class="govuk-form-group govuk-character-count">
+                        <h1 class="govuk-label-wrapper">
+                            <label class="govuk-label govuk-label--l" for="post-text">
+                                Post content
+                            </label>
+                        </h1>
+                        <div class="govuk-hint">I apologise for this absolute hack but Pleroma does not have a sharing URL that I can send you to.</div>
+                        <textarea class="govuk-textarea govuk-js-character-count" id="post-text" name="post-text"
+                                  rows="5"></textarea>
+                    </div>
+
+                    <div class="govuk-button-group">
+                        <button class="govuk-button" id="post-button">
+                            Post
+                        </button>
+                        <a href="#" class="govuk-button govuk-button--secondary" id="cancel-button">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<script type="module" src="../../js/govuk-frontend.min.js"></script>
+<script type="module">
+    import { initAll } from '../../js/govuk-frontend.min.js';
+    initAll();
+</script>
+<script type="text/javascript">
+
+    const oauth_scopes = 'write:statuses read:accounts';
+
+    async function registerMastodonApp(instanceUrl, clientName) {
+        try {
+            const response = await fetch(`${instanceUrl}/api/v1/apps`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    client_name: clientName,
+                    redirect_uris: window.location.origin + window.location.pathname,
+                    scopes: oauth_scopes,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to register app');
+            }
+
+            const data = await response.json();
+            const clientId = data.client_id;
+            const clientSecret = data.client_secret;
+
+            return {clientId, clientSecret};
+        } catch (error) {
+            console.error('Error registering app:', error.message);
+            throw error;
+        }
+    }
+
+    async function getMastodonApp(instanceUrl, clientName) {
+        let client_id = sessionStorage.getItem("share-fedi-client-id");
+        let client_secret = sessionStorage.getItem("share-fedi-client-secret");
+
+        if (!client_id || !client_secret) {
+            try {
+                const app = await registerMastodonApp(instanceUrl, clientName);
+                sessionStorage.setItem("share-fedi-instance-url", instanceUrl);
+                sessionStorage.setItem("share-fedi-client-id", app.clientId);
+                sessionStorage.setItem("share-fedi-client-secret", app.clientSecret);
+                return app;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    }
+
+    async function exchangeCodeForToken(code, clientId, clientSecret) {
+        const instanceUrl = sessionStorage.getItem("share-fedi-instance-url");
+        const tokenResponse = await fetch(`${instanceUrl}/oauth/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                grant_type: 'authorization_code',
+                code: code,
+                client_id: clientId,
+                client_secret: clientSecret,
+                redirect_uri: window.location.origin + window.location.pathname,
+            }),
+        });
+
+        if (tokenResponse.ok) {
+            const tokenData = await tokenResponse.json();
+            sessionStorage.setItem('share-fedi-access-token', tokenData.access_token);
+            sessionStorage.setItem('share-fedi-refresh-token', tokenData.refresh_token);
+            return tokenData;
+        } else {
+            throw new Error(`Failed to exchange code for token: ${tokenResponse.statusText}`);
+        }
+    }
+
+    async function ensureAuthenticated() {
+        const instanceUrl = sessionStorage.getItem("share-fedi-instance-url");
+        let accessToken = sessionStorage.getItem('share-fedi-access-token');
+        const refreshToken = sessionStorage.getItem('share-fedi-refresh-token');
+        const clientId = sessionStorage.getItem('share-fedi-client-id');
+        const clientSecret = sessionStorage.getItem('share-fedi-client-secret');
+        const authCode = sessionStorage.getItem('share-fedi-auth-code');
+
+        if (!accessToken && authCode) {
+            // If there's no access token but there's an authorization code, exchange it for a token
+            try {
+                const tokenData = await exchangeCodeForToken(authCode, clientId, clientSecret);
+                accessToken = tokenData.access_token;
+                sessionStorage.setItem('share-fedi-access-token', accessToken);
+                sessionStorage.setItem('share-fedi-refresh-token', tokenData.refresh_token);
+            } catch (error) {
+                console.error('Error exchanging code for token:', error);
+                startOAuthLogin();
+                return null; // Authentication is in progress
+            }
+        }
+
+        if (!accessToken) {
+            startOAuthLogin();
+            return null; // Authentication is in progress
+        }
+
+        try {
+            let response = await fetch(`${instanceUrl}/api/v1/accounts/verify_credentials`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
+
+            if (response.ok) {
+                return await response.json(); // User is authenticated, return the profile
+            } else if (response.status === 403 && refreshToken) {
+                // Token might be expired, attempt to refresh it
+                const tokenResponse = await fetch(`${instanceUrl}/oauth/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        grant_type: 'refresh_token',
+                        refresh_token: refreshToken,
+                        client_id: clientId,
+                        client_secret: clientSecret,
+                    }),
+                });
+
+                if (tokenResponse.ok) {
+                    const tokenData = await tokenResponse.json();
+                    sessionStorage.setItem('share-fedi-access-token', tokenData.access_token);
+                    sessionStorage.setItem('share-fedi-refresh-token', tokenData.refresh_token);
+                    accessToken = tokenData.access_token;
+
+                    // Retry the request with the new access token
+                    response = await fetch(`${instanceUrl}/api/v1/accounts/verify_credentials`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    });
+
+                    if (response.ok) {
+                        return await response.json(); // User is authenticated, return the profile
+                    } else {
+                        throw new Error(`Error verifying credentials after token refresh: ${response.statusText}`);
+                    }
+                } else {
+                    // Refresh token failed, clear stored tokens and reauthenticate
+                    sessionStorage.removeItem('share-fedi-access-token');
+                    sessionStorage.removeItem('share-fedi-refresh-token');
+                    startOAuthLogin();
+                    return null; // Authentication is in progress
+                }
+            } else {
+                throw new Error(`Error verifying credentials: ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error(error);
+            // startOAuthLogin();
+            return null; // Authentication is in progress
+        }
+    }
+
+    function startOAuthLogin() {
+        const scopes = 'read:accounts write:statuses';
+        const instanceUrl = sessionStorage.getItem("share-fedi-instance-url");
+        window.location.href = `${instanceUrl}/oauth/authorize?response_type=code&client_id=${sessionStorage.getItem('share-fedi-client-id')}&redirect_uri=${encodeURIComponent(window.location.origin + window.location.pathname)}&scope=${encodeURIComponent(scopes)}`;
+    }
+
+    async function fetchUserProfile() {
+        const userProfile = await ensureAuthenticated();
+
+        if (userProfile) {
+            console.log('User Profile:', userProfile);
+            return userProfile;
+        }
+        // If the function returned null, the reauthentication process has started.
+    }
+
+    async function share() {
+        const instanceUrl = 'https://altelectron.org.uk';
+        const clientName = 'irl.xyz testing';
+
+        await getMastodonApp(instanceUrl, clientName);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        if (code) {
+            sessionStorage.setItem('share-fedi-auth-code', code);
+        }
+
+        const profile = await fetchUserProfile();
+
+        document.getElementById("avatar").src = profile.avatar;
+        document.getElementById("display-name").textContent = profile.display_name;
+        document.getElementById("handle").textContent = `@${profile.acct}`
+        document.getElementById("cancel-button").href = sessionStorage.getItem("share-fedi-return-url");
+        document.getElementById("post-text").textContent = sessionStorage.getItem("share-fedi-text");
+    }
+
+    document.getElementById("post-button").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+            const instanceUrl = sessionStorage.getItem("share-fedi-instance-url");
+            const accessToken = sessionStorage.getItem('share-fedi-access-token');
+            const postText = document.getElementById('post-text').value;
+
+            try {
+                const response = await fetch(`${instanceUrl}/api/v1/statuses`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: postText }),
+                });
+
+                if (response.ok) {
+                    window.location.href = sessionStorage.getItem("share-fedi-return-url"); // Return the response data if needed
+                } else {
+                    throw new Error(`Failed to post status: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error posting status:', error);
+            }
+
+    });
+
+    share();
+
+</script>
+</body>
+</html>

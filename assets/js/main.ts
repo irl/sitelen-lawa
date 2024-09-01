@@ -4,4 +4,4 @@ function appSetup() {
     setupShareOptions();
 }
 
-window.onload = appSetup;
+document.addEventListener('DOMContentLoaded', appSetup);
