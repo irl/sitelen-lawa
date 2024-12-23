@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "govuk-frontend": "^5.5.0",
+    "hmrc-frontend": "^6.27.0",
+    "inter-ui": "^4.0.2"
+  }
+}
