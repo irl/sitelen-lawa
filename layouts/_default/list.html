@@ -33,9 +33,9 @@
             {{ range $paginator.Pages }}
             <article>
               <h2 class="govuk-heading-l"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-              <p class="govuk-body">
+              <div class="app-content">
                 {{ .Summary }}
-              </p>
+              </div>
             </article>
             {{ end }}
             {{ partial "pagination.html" . }}

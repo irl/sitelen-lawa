@@ -37,7 +37,9 @@
                     </p>
                     <h3 class="govuk-heading-s govuk-!-font-size-27 govuk-!-padding-top-0"><a
                             href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
-                    <p class="govuk-body">{{ .Summary }}</p>
+                    <div class="app-content">
+                        {{ .Summary }}
+                    </div>
                 </div>
 
                 {{- end }}
